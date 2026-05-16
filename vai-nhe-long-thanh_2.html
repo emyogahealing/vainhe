@@ -1,0 +1,1291 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Vai Nhẹ Lòng Thanh — Êm Yoga & Healing</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=Be+Vietnam+Pro:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sage: #8a9e8a;
+    --sage-light: #c4d4c0;
+    --sage-pale: #eef3ec;
+    --cream: #faf8f4;
+    --warm-white: #f5f2ed;
+    --earth: #7a6a58;
+    --earth-dark: #4a3d30;
+    --text: #2d2820;
+    --text-soft: #6b5f52;
+    --mist: rgba(138,158,138,0.12);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--text);
+    font-family: 'Be Vietnam Pro', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE TEXTURE OVERLAY */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 1000;
+    opacity: 0.6;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(196,212,192,0.35) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 60% at 10% 80%, rgba(138,158,138,0.2) 0%, transparent 60%),
+      radial-gradient(ellipse 80% 40% at 50% 100%, rgba(234,228,218,0.4) 0%, transparent 60%),
+      var(--cream);
+  }
+
+  .hero-decoration {
+    position: absolute;
+    top: 0; right: 0;
+    width: 45%;
+    height: 100%;
+    background: linear-gradient(160deg, rgba(196,212,192,0.25) 0%, transparent 60%);
+    clip-path: polygon(20% 0, 100% 0, 100% 100%, 0% 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 80px 6vw 60px;
+    max-width: 900px;
+  }
+
+  .series-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.2s;
+  }
+
+  .series-badge::before {
+    content: '';
+    display: block;
+    width: 32px;
+    height: 1px;
+    background: var(--sage);
+  }
+
+  .hero-eyebrow {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: clamp(16px, 2.5vw, 22px);
+    color: var(--earth);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.4s;
+  }
+
+  .hero-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(52px, 9vw, 110px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    color: var(--earth-dark);
+    margin-bottom: 40px;
+    opacity: 0;
+    animation: fadeUp 0.9s ease forwards 0.5s;
+  }
+
+  .hero-title em {
+    font-style: italic;
+    color: var(--sage);
+    display: block;
+  }
+
+  .hero-desc {
+    font-size: clamp(14px, 1.6vw, 16px);
+    line-height: 1.8;
+    color: var(--text-soft);
+    max-width: 520px;
+    margin-bottom: 56px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.7s;
+  }
+
+  .hero-meta {
+    display: flex;
+    gap: 40px;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 0.9s;
+  }
+
+  .meta-item {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .meta-label {
+    font-size: 10px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .meta-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(18px, 2.2vw, 24px);
+    color: var(--earth-dark);
+    font-weight: 400;
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 6vw;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    opacity: 0;
+    animation: fadeUp 0.8s ease forwards 1.2s;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, var(--sage), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; transform: scaleY(1); }
+    50% { opacity: 1; transform: scaleY(1.1); }
+  }
+
+  /* LEAF DECORATIONS */
+  .leaf {
+    position: absolute;
+    opacity: 0.12;
+    pointer-events: none;
+  }
+
+  .leaf-1 {
+    top: 8%;
+    right: 8%;
+    width: 180px;
+    animation: leafFloat 8s ease-in-out infinite;
+  }
+
+  .leaf-2 {
+    bottom: 15%;
+    right: 20%;
+    width: 120px;
+    animation: leafFloat 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes leafFloat {
+    0%, 100% { transform: rotate(-5deg) translateY(0); }
+    50% { transform: rotate(5deg) translateY(-15px); }
+  }
+
+  /* DIVIDER */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--sage-light), transparent);
+    margin: 0 auto;
+  }
+
+  /* SECTIONS */
+  section {
+    padding: 80px 6vw;
+    position: relative;
+  }
+
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--sage);
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, var(--sage-light), transparent);
+    max-width: 80px;
+  }
+
+  /* PROBLEM SECTION */
+  .problem {
+    background: var(--warm-white);
+  }
+
+  .problem-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: start;
+  }
+
+  .problem-left h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    color: var(--earth-dark);
+    margin-bottom: 24px;
+  }
+
+  .problem-left h2 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .problem-left p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--text-soft);
+  }
+
+  .problem-items {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-top: 8px;
+  }
+
+  .problem-item {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px 24px;
+    background: var(--cream);
+    border-radius: 2px;
+    border-left: 2px solid var(--sage-light);
+    transition: border-color 0.3s ease;
+  }
+
+  .problem-item:hover {
+    border-color: var(--sage);
+  }
+
+  .problem-icon {
+    font-size: 20px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .problem-item-text {
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--text-soft);
+  }
+
+  .problem-item-text strong {
+    display: block;
+    font-weight: 500;
+    color: var(--earth-dark);
+    margin-bottom: 4px;
+    font-size: 14px;
+  }
+
+  /* SCHEDULE SECTION */
+  .schedule-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    color: var(--earth-dark);
+    margin-bottom: 48px;
+    max-width: 600px;
+    line-height: 1.25;
+  }
+
+  .schedule-title em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-width: 640px;
+    position: relative;
+  }
+
+  .timeline::before {
+    content: '';
+    position: absolute;
+    left: 52px;
+    top: 28px;
+    bottom: 28px;
+    width: 1px;
+    background: linear-gradient(to bottom, var(--sage-light), transparent);
+  }
+
+  .timeline-item {
+    display: grid;
+    grid-template-columns: 104px 1fr;
+    gap: 0;
+    padding: 20px 0;
+    align-items: start;
+  }
+
+  .timeline-time {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--sage);
+    padding-top: 2px;
+    position: relative;
+  }
+
+  .timeline-time::after {
+    content: '';
+    position: absolute;
+    right: -16px;
+    top: 12px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--sage-light);
+    border: 2px solid var(--cream);
+    box-shadow: 0 0 0 1px var(--sage-light);
+  }
+
+  .timeline-body h4 {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--earth-dark);
+    margin-bottom: 4px;
+    letter-spacing: 0.02em;
+  }
+
+  .timeline-body p {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.6;
+  }
+
+  /* ABOUT SECTION */
+  .about {
+    background: var(--earth-dark);
+    color: var(--cream);
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(32px, 4vw, 52px);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    color: var(--sage-light);
+  }
+
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: rgba(250,248,244,0.7);
+    margin-bottom: 16px;
+  }
+
+  .about-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 32px;
+  }
+
+  .tag {
+    padding: 8px 16px;
+    border: 1px solid rgba(196,212,192,0.3);
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    color: var(--sage-light);
+    border-radius: 1px;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 400px;
+  }
+
+  .about-card {
+    position: absolute;
+    background: rgba(196,212,192,0.08);
+    border: 1px solid rgba(196,212,192,0.15);
+    border-radius: 2px;
+    padding: 28px 32px;
+  }
+
+  .about-card-1 {
+    top: 0; left: 0; right: 20%;
+  }
+
+  .about-card-2 {
+    bottom: 0; left: 20%; right: 0;
+    background: rgba(196,212,192,0.05);
+  }
+
+  .about-card h4 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--sage-light);
+    margin-bottom: 12px;
+    font-weight: 300;
+    font-style: italic;
+  }
+
+  .about-card p {
+    font-size: 13px;
+    color: rgba(250,248,244,0.6);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* CHARITY SECTION */
+  .charity {
+    background: var(--sage-pale);
+    text-align: center;
+  }
+
+  .charity-inner {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .charity-icon {
+    font-size: 40px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .charity h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 3.5vw, 44px);
+    font-weight: 300;
+    color: var(--earth-dark);
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+
+  .charity h2 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .charity p {
+    font-size: 15px;
+    line-height: 1.85;
+    color: var(--text-soft);
+  }
+
+  /* CTA SECTION */
+  .cta-section {
+    background: var(--cream);
+    text-align: center;
+    padding: 100px 6vw;
+  }
+
+  .cta-inner {
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  .cta-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(36px, 5vw, 64px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--earth-dark);
+    margin-bottom: 20px;
+  }
+
+  .cta-section h2 em {
+    font-style: italic;
+    color: var(--sage);
+  }
+
+  .cta-section p {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.8;
+    margin-bottom: 48px;
+  }
+
+  .cta-info-box {
+    background: var(--warm-white);
+    border: 1px solid var(--sage-light);
+    border-radius: 2px;
+    padding: 36px 40px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .cta-info-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(138,158,138,0.15);
+  }
+
+  .cta-info-row:last-child { border-bottom: none; }
+
+  .cta-info-key {
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+  }
+
+  .cta-info-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    color: var(--earth-dark);
+  }
+
+  .cta-info-val.highlight {
+    color: var(--sage);
+    font-style: italic;
+  }
+
+  .spots-bar {
+    margin: 32px 0;
+  }
+
+  .spots-label {
+    display: flex;
+    justify-content: space-between;
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-bottom: 10px;
+  }
+
+  .spots-track {
+    height: 3px;
+    background: var(--sage-pale);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .spots-fill {
+    height: 100%;
+    width: 33%;
+    background: linear-gradient(to right, var(--sage-light), var(--sage));
+    border-radius: 2px;
+    animation: fillBar 1.5s ease forwards 1s;
+  }
+
+  @keyframes fillBar {
+    from { width: 0; }
+    to { width: 33%; }
+  }
+
+  .btn-register {
+    display: inline-block;
+    background: var(--earth-dark);
+    color: var(--cream);
+    padding: 20px 56px;
+    font-size: 13px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+  }
+
+  .btn-register::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--sage);
+    transform: translateX(-100%);
+    transition: transform 0.4s ease;
+  }
+
+  .btn-register:hover::before {
+    transform: translateX(0);
+  }
+
+  .btn-register span {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta-note {
+    font-size: 12px;
+    color: var(--text-soft);
+    margin-top: 20px;
+    line-height: 1.6;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--earth-dark);
+    padding: 48px 6vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+  .footer-brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--sage-light);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .footer-address {
+    font-size: 13px;
+    color: rgba(250,248,244,0.5);
+    line-height: 1.7;
+    text-align: right;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(32px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* PHONE INPUT */
+  .phone-input-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .phone-label {
+    font-size: 13px;
+    color: var(--earth-dark);
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+
+  .phone-input {
+    width: 100%;
+    padding: 18px 20px;
+    border: 1px solid var(--sage-light);
+    background: var(--warm-white);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    color: var(--earth-dark);
+    letter-spacing: 0.08em;
+    outline: none;
+    border-radius: 2px;
+    transition: border-color 0.3s;
+    text-align: center;
+  }
+
+  .phone-input:focus {
+    border-color: var(--sage);
+  }
+
+  .phone-hint {
+    font-size: 12px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  /* PAYMENT BOX */
+  .payment-box {
+    background: var(--warm-white);
+    border: 1px solid var(--sage-light);
+    border-radius: 2px;
+    overflow: hidden;
+  }
+
+  .payment-header {
+    background: var(--earth-dark);
+    padding: 16px 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .payment-badge {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--sage-light);
+  }
+
+  .qr-wrap {
+    padding: 28px 20px 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    border-bottom: 1px solid rgba(138,158,138,0.15);
+  }
+
+  .qr-img {
+    width: 200px;
+    height: 200px;
+    border-radius: 4px;
+    border: 3px solid var(--cream);
+    box-shadow: 0 4px 20px rgba(74,61,48,0.12);
+  }
+
+  .qr-hint {
+    font-size: 12px;
+    color: var(--text-soft);
+    letter-spacing: 0.04em;
+  }
+
+  .bank-rows {
+    padding: 8px 28px;
+  }
+
+  .bank-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 1px solid rgba(138,158,138,0.12);
+    gap: 16px;
+  }
+
+  .bank-row:last-child { border-bottom: none; }
+
+  .bank-key {
+    font-size: 11px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--sage);
+    flex-shrink: 0;
+  }
+
+  .bank-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--earth-dark);
+    text-align: right;
+  }
+
+  .bank-val.highlight-green {
+    color: var(--sage);
+    font-style: italic;
+    font-size: 22px;
+  }
+
+  .bank-val-copy {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .bank-val-copy span {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    color: var(--earth-dark);
+    word-break: break-all;
+    text-align: right;
+  }
+
+  .copy-btn {
+    background: var(--sage-pale);
+    border: 1px solid var(--sage-light);
+    color: var(--sage);
+    font-size: 11px;
+    padding: 5px 12px;
+    cursor: pointer;
+    letter-spacing: 0.08em;
+    border-radius: 1px;
+    flex-shrink: 0;
+    transition: all 0.2s;
+    font-family: 'Be Vietnam Pro', sans-serif;
+  }
+
+  .copy-btn:hover, .copy-btn.copied {
+    background: var(--sage);
+    color: var(--cream);
+    border-color: var(--sage);
+  }
+
+  .payment-note {
+    padding: 20px 28px;
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.8;
+    border-top: 1px solid rgba(138,158,138,0.15);
+    text-align: center;
+  }
+
+  .btn-back {
+    display: block;
+    width: 100%;
+    padding: 14px;
+    background: transparent;
+    border: none;
+    font-size: 12px;
+    color: var(--sage);
+    cursor: pointer;
+    letter-spacing: 0.1em;
+    font-family: 'Be Vietnam Pro', sans-serif;
+    padding-bottom: 20px;
+  }
+
+  .btn-back:hover { color: var(--earth-dark); }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .problem-grid,
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+
+    .about-visual { display: none; }
+
+    .hero-content { padding: 100px 6vw 80px; }
+
+    .hero-meta { gap: 24px; }
+
+    .cta-info-box { padding: 24px 20px; }
+
+    footer { flex-direction: column; text-align: center; }
+    .footer-address { text-align: center; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-decoration"></div>
+
+  <svg class="leaf leaf-1" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 10 C140 40 180 100 160 160 C140 220 80 260 40 240 C0 220 10 160 30 120 C50 80 60 -20 100 10Z" fill="#8a9e8a"/>
+    <path d="M100 10 C100 80 95 160 40 240" stroke="#8a9e8a" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <svg class="leaf leaf-2" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M100 10 C140 40 180 100 160 160 C140 220 80 260 40 240 C0 220 10 160 30 120 C50 80 60 -20 100 10Z" fill="#8a9e8a"/>
+    <path d="M100 10 C100 80 95 160 40 240" stroke="#8a9e8a" stroke-width="1.5" fill="none"/>
+  </svg>
+
+  <div class="hero-content">
+    <div class="series-badge">Điểm Chạm Bình Yên · Tháng 5 · Buổi 1</div>
+    <p class="hero-eyebrow">Trải nghiệm Yoga cùng Êm</p>
+    <h1 class="hero-title">
+      Vai Nhẹ<em>Lòng Thanh</em>
+    </h1>
+    <p class="hero-desc">
+      Một buổi sáng yên tĩnh để vai được đặt xuống, cổ được nới lỏng, và bạn được thở — thật sự thở — sau những ngày dài gồng gánh.
+    </p>
+    <div class="hero-meta">
+      <div class="meta-item">
+        <span class="meta-label">Ngày</span>
+        <span class="meta-value">Thứ 7, 24/5</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Giờ</span>
+        <span class="meta-value">9h30 sáng</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Số chỗ</span>
+        <span class="meta-value">Chỉ 6 người</span>
+      </div>
+      <div class="meta-item">
+        <span class="meta-label">Kinh phí</span>
+        <span class="meta-value">100.000đ</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-scroll">
+    <div class="scroll-line"></div>
+    Khám phá
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEM SECTION -->
+<section class="problem">
+  <div class="section-label">Bạn có nhận ra mình không?</div>
+  <div class="problem-grid">
+    <div class="problem-left">
+      <h2>Vai bạn chưa bao giờ <em>thực sự được nghỉ</em></h2>
+      <p>
+        Ngồi làm việc thì vai gồng, nhìn điện thoại thì cổ cúi, nằm ngủ sai tư thế thì gáy cứng — rồi sáng dậy lại tiếp tục vòng đó.
+        <br><br>
+        Cơ thể không kêu to. Nó chỉ âm thầm tích lại — cho đến khi thật sự lên tiếng.
+      </p>
+    </div>
+    <div class="problem-items">
+      <div class="problem-item">
+        <div class="problem-icon">🦴</div>
+        <div class="problem-item-text">
+          <strong>Thoái hoá, phồng đĩa đệm</strong>
+          Những tổn thương dài hạn bắt đầu từ những thói quen tưởng chừng vô hại mỗi ngày.
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">😮‍💨</div>
+        <div class="problem-item-text">
+          <strong>Mỏi nhức liên tục, không quay đầu được</strong>
+          Cứng cổ, vai nặng, xoay một cái nghe "rắc" — quen rồi, nhưng quen không có nghĩa là ổn.
+        </div>
+      </div>
+      <div class="problem-item">
+        <div class="problem-icon">🌊</div>
+        <div class="problem-item-text">
+          <strong>Cơn giận dữ không rõ nguyên nhân</strong>
+          Căng thẳng tích trong cơ thể lâu ngày bắt đầu rò rỉ ra ngoài theo những cách bạn không kiểm soát được.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SCHEDULE SECTION -->
+<section>
+  <div class="section-label">Chương trình buổi tập</div>
+  <h2 class="schedule-title">70 phút để cơ thể <em>được về nhà</em></h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-time">10'</div>
+      <div class="timeline-body">
+        <h4>Thở — thần kinh bớt căng</h4>
+        <p>Các bài thở đơn giản giúp hệ thần kinh chuyển từ trạng thái căng sang thư giãn, chuẩn bị cho cơ thể tiếp nhận sâu hơn.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">40'</div>
+      <div class="timeline-body">
+        <h4>Tư thế — đi sâu vào từng lớp cơ</h4>
+        <p>Chuỗi tư thế tập trung vùng cổ vai gáy, được thiết kế riêng cho người chưa tập và dân văn phòng. Không cần dẻo, không cần kinh nghiệm.</p>
+      </div>
+    </div>
+    <div class="timeline-item">
+      <div class="timeline-time">20'</div>
+      <div class="timeline-body">
+        <h4>Thư giãn sâu — để cơ thể tự hồi phục</h4>
+        <p>Giai đoạn quan trọng nhất. Cơ thể nằm yên và tự làm những gì nó cần — tái tạo, hồi phục, buông thả.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ABOUT SECTION -->
+<section class="about">
+  <div class="section-label" style="color: rgba(196,212,192,0.6);">Người đồng hành</div>
+  <div class="about-grid">
+    <div class="about-text">
+      <h2>Kiều Anh — người tạo ra Êm</h2>
+      <p>
+        Mình không dạy yoga theo kiểu hoàn hảo hay kỹ thuật đỉnh cao. Mình dạy theo cách mình đã học được — rằng cơ thể cần được lắng nghe, không bị thúc ép.
+      </p>
+      <p>
+        Êm nhỏ thôi, chỉ 6 người mỗi buổi, để mình thực sự có thể ở bên từng bạn — điều chỉnh, hỗ trợ, và đồng hành.
+      </p>
+      <div class="about-tags">
+        <span class="tag">Yoga 200h Hatha</span>
+        <span class="tag">Yin Yoga 50h</span>
+        <span class="tag">Vận động viên cấp 1 quốc gia</span>
+        <span class="tag">Biên đạo múa 6+ năm</span>
+      </div>
+    </div>
+    <div class="about-visual">
+      <div class="about-card about-card-1">
+        <h4>"Nhỏ mà thật còn hơn lớn mà ồn ào."</h4>
+        <p>Triết lý của Êm — không gian riêng tư, hỗ trợ sát sao, giáo án cá nhân hoá theo từng nhóm.</p>
+      </div>
+      <div class="about-card about-card-2">
+        <h4>14 Lê Chân, Hạ Long</h4>
+        <p>Không gian tĩnh lặng, ấm áp, được thiết kế để bạn cảm thấy an toàn ngay từ bước vào.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CHARITY SECTION -->
+<section class="charity">
+  <div class="charity-inner">
+    <span class="charity-icon">🐾</span>
+    <div class="section-label" style="justify-content: center;">Ý nghĩa hơn một buổi tập</div>
+    <h2>Toàn bộ kinh phí góp vào <em>Trạm cứu hộ chó mèo Hạ Long</em></h2>
+    <p>
+      100.000đ bạn bỏ ra không chỉ là cho mình — mà còn đi vào quỹ bảo trợ động vật của Trạm cứu hộ chó mèo Hạ Long. Bạn vừa được nghỉ ngơi, vừa cùng mình làm được một điều nhỏ tử tế. 🍃
+    </p>
+  </div>
+</section>
+
+<!-- CTA SECTION -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <div class="section-label" style="justify-content: center;">Đăng ký tham dự</div>
+    <h2>Còn chỗ cho <em>bạn</em></h2>
+    <p>Chỉ 6 người — để buổi sáng thứ 7 này thực sự yên tĩnh và trọn vẹn với từng người trong đó.</p>
+
+    <div class="cta-info-box">
+      <div class="cta-info-row">
+        <span class="cta-info-key">Sự kiện</span>
+        <span class="cta-info-val">Vai Nhẹ, Lòng Thanh</span>
+      </div>
+      <div class="cta-info-row">
+        <span class="cta-info-key">Thời gian</span>
+        <span class="cta-info-val">Thứ 7, 24/5 · 9h30</span>
+      </div>
+      <div class="cta-info-row">
+        <span class="cta-info-key">Địa điểm</span>
+        <span class="cta-info-val">14 Lê Chân, Hạ Long</span>
+      </div>
+      <div class="cta-info-row">
+        <span class="cta-info-key">Thời lượng</span>
+        <span class="cta-info-val">70 phút</span>
+      </div>
+      <div class="cta-info-row">
+        <span class="cta-info-key">Kinh phí</span>
+        <span class="cta-info-val highlight">100.000đ / người</span>
+      </div>
+      <div class="cta-info-row">
+        <span class="cta-info-key">Số chỗ</span>
+        <span class="cta-info-val highlight">Giới hạn 6 người</span>
+      </div>
+    </div>
+
+    <div class="spots-bar">
+      <div class="spots-label">
+        <span>Chỗ đã đăng ký</span>
+        <span>Còn 4 chỗ trống</span>
+      </div>
+      <div class="spots-track">
+        <div class="spots-fill"></div>
+      </div>
+    </div>
+
+    <!-- STEP 1: Phone input -->
+    <div id="step-phone">
+      <div class="phone-input-wrap">
+        <label class="phone-label">Nhập số điện thoại của bạn</label>
+        <input type="tel" id="phone-input" class="phone-input" placeholder="VD: 0912 345 678" maxlength="11" inputmode="numeric" />
+        <p class="phone-hint">Số điện thoại sẽ được ghi vào nội dung chuyển khoản để Êm xác nhận chỗ cho bạn 🌿</p>
+        <button class="btn-register" onclick="goToPayment()">
+          <span>Xem thông tin chuyển khoản →</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- STEP 2: Payment info -->
+    <div id="step-payment" style="display:none;">
+      <div class="payment-box">
+        <div class="payment-header">
+          <span class="payment-badge">Thông tin chuyển khoản</span>
+        </div>
+
+        <div class="qr-wrap">
+          <img id="qr-img" src="" alt="QR chuyển khoản" class="qr-img" />
+          <p class="qr-hint">Quét mã để chuyển khoản nhanh</p>
+        </div>
+
+        <div class="bank-rows">
+          <div class="bank-row">
+            <span class="bank-key">Ngân hàng</span>
+            <span class="bank-val">Techcombank</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-key">Số tài khoản</span>
+            <div class="bank-val-copy">
+              <span id="stk-display">9807101998</span>
+              <button class="copy-btn" onclick="copyText('9807101998', this)">Sao chép</button>
+            </div>
+          </div>
+          <div class="bank-row">
+            <span class="bank-key">Chủ tài khoản</span>
+            <span class="bank-val">DƯƠNG KIỀU ANH</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-key">Số tiền</span>
+            <span class="bank-val highlight-green">100.000đ</span>
+          </div>
+          <div class="bank-row">
+            <span class="bank-key">Nội dung CK</span>
+            <div class="bank-val-copy">
+              <span id="noi-dung-display"></span>
+              <button class="copy-btn" onclick="copyNoidung(this)">Sao chép</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="payment-note">
+          Sau khi chuyển khoản, Êm sẽ xác nhận và thêm bạn vào nhóm Zalo trong vòng 24h 🌿<br>
+          Không cần kinh nghiệm yoga. Chỉ cần bạn có mặt.
+        </div>
+
+        <button class="btn-back" onclick="goBack()">← Sửa số điện thoại</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-brand">Êm Yoga & Healing</div>
+  <div class="footer-address">
+    14 Lê Chân, Hạ Long, Quảng Ninh<br>
+    <span style="opacity:0.4; font-size:11px;">Điểm Chạm Bình Yên · Tháng 5 · Tháng 6 · Tháng 7</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.problem-item, .timeline-item, .about-card, .charity-inner, .cta-inner');
+  reveals.forEach(el => el.classList.add('reveal'));
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => entry.target.classList.add('visible'), i * 80);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Payment flow
+  const BANK_ID   = 'TCB';       // Techcombank
+  const ACCOUNT   = '9807101998';
+  const AMOUNT    = 100000;
+  const ACCOUNT_NAME = 'DUONG KIEU ANH';
+
+  function formatPhone(raw) {
+    return raw.replace(/\D/g, '');
+  }
+
+  function buildNoidung(phone) {
+    return 'VAINHE ' + phone;
+  }
+
+  function buildQR(phone) {
+    const noidung = encodeURIComponent(buildNoidung(phone));
+    return `https://img.vietqr.io/image/${BANK_ID}-${ACCOUNT}-compact2.png?amount=${AMOUNT}&addInfo=${noidung}&accountName=${encodeURIComponent(ACCOUNT_NAME)}`;
+  }
+
+  function goToPayment() {
+    const raw = document.getElementById('phone-input').value.trim();
+    const phone = formatPhone(raw);
+    if (phone.length < 9) {
+      document.getElementById('phone-input').style.borderColor = '#c0392b';
+      document.getElementById('phone-input').placeholder = 'Vui lòng nhập số điện thoại hợp lệ';
+      return;
+    }
+    document.getElementById('phone-input').style.borderColor = '';
+
+    // Set noi dung
+    const nd = buildNoidung(phone);
+    document.getElementById('noi-dung-display').textContent = nd;
+
+    // Set QR
+    document.getElementById('qr-img').src = buildQR(phone);
+
+    // Switch views
+    document.getElementById('step-phone').style.display = 'none';
+    document.getElementById('step-payment').style.display = 'block';
+
+    // Scroll to payment
+    document.getElementById('step-payment').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+
+  function goBack() {
+    document.getElementById('step-payment').style.display = 'none';
+    document.getElementById('step-phone').style.display = 'block';
+  }
+
+  function copyText(text, btn) {
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = 'Đã chép!';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Sao chép'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
+
+  function copyNoidung(btn) {
+    const text = document.getElementById('noi-dung-display').textContent;
+    copyText(text, btn);
+  }
+
+  // Format phone input live
+  document.getElementById('phone-input').addEventListener('input', function() {
+    this.value = this.value.replace(/[^\d\s]/g, '');
+    this.style.borderColor = '';
+  });
+
+  document.getElementById('phone-input').addEventListener('keydown', function(e) {
+    if (e.key === 'Enter') goToPayment();
+  });
+</script>
+
+</body>
+</html>
